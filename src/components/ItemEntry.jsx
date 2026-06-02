@@ -43,13 +43,21 @@ export default function ItemEntry() {
             <div className="w-24">
               <Label value="Qty" />
               <TextInput
-                type="number"
-                min="0"
-                value={item.quantity}
-                onChange={(e) =>
-                  updateItem(i, "quantity", parseInt(e.target.value) || 0)
-                }
-                sizing="sm"
+                type="text"
+                 inputMode="numeric"
+              value={item.quantity === 0 ? "" : item.quantity}
+                 onChange={(e) => {
+               const value = e.target.value;
+
+               if (/^\d*$/.test(value)) {
+                    updateItem(
+                           i,
+                     "quantity",
+               value === "" ? 0 : Number(value)
+      );
+    }
+  }}
+  sizing="sm"
               />
             </div>
 
